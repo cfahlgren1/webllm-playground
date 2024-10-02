@@ -24,6 +24,8 @@ license: apache-2.0
 
 </div>
 
+![WebLLM Gif](./webllm.gif)
+
 ## Chat Stats
 
 ![Chat Stats](./chat-stats.png)
