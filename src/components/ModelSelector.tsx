@@ -69,6 +69,11 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
           {isModelLoaded ? 'Loaded' : 'Load Model'}
         </button>
       </div>
+      {!isModelLoaded && (
+        <p className="mt-2 text-xs italic text-gray-400">
+          First download may take a little bit. Subsequent loads will read from cache.
+        </p>
+      )}
       {loadProgress && (
         <div className="mt-2 text-sm text-gray-400">{loadProgress}</div>
       )}
