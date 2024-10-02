@@ -14,3 +14,5 @@
 ![WebLLM in Action](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/webllm/webllm.gif)
 
 </div>
+
+![WebLLM in Action](./webllm.gif)
