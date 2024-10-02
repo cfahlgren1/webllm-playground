@@ -1,3 +1,13 @@
+---
+title: WebLLM Playground
+emoji: 🏎️
+colorFrom: purple
+colorTo: indigo
+sdk: static
+pinned: true
+header: mini
+license: apache-2.0
+---
 ![WebLLM Playground](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/webllm/WebLLM.png)
 
 <div align="center">
