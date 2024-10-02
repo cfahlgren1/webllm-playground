@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 interface InputAreaProps {
   onSendMessage: (input: string) => Promise<void>;
@@ -8,6 +8,7 @@ interface InputAreaProps {
 
 const InputArea: React.FC<InputAreaProps> = ({ onSendMessage, isGenerating, isModelLoaded }) => {
   const [input, setInput] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleSend = () => {
     if (input.trim() && !isGenerating && isModelLoaded) {
@@ -15,6 +16,12 @@ const InputArea: React.FC<InputAreaProps> = ({ onSendMessage, isGenerating, isMo
       setInput('');
     }
   };
+
+  useEffect(() => {
+    if (!isGenerating && inputRef.current) {
+      inputRef.current.focus();
+    }
+  }, [isGenerating]);
 
   const isSendDisabled = !isModelLoaded || isGenerating || !input.trim();
 
@@ -29,6 +36,7 @@ const InputArea: React.FC<InputAreaProps> = ({ onSendMessage, isGenerating, isMo
           disabled={!isModelLoaded || isGenerating}
           className="flex-grow p-3 rounded-lg bg-[var(--bg-color)] focus:outline-none focus:ring-2 focus:[var(--border-color)] text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed"
           onKeyPress={(e) => e.key === 'Enter' && !isSendDisabled && handleSend()}
+          ref={inputRef}
         />
         <button
           onClick={handleSend}
