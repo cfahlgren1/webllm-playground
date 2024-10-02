@@ -11,4 +11,6 @@
 [![Related Repository: MLC LLM](https://img.shields.io/badge/Related_Repo-MLC_LLM-fafbfc?logo=github)](https://github.com/mlc-ai/mlc-llm/)
 ---
 
+![WebLLM in Action](https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/webllm/webllm.gif)
+
 </div>
