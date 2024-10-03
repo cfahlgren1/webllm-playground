@@ -4,7 +4,6 @@ import {
   MicrosoftIcon,
   MistralIcon,
   GoogleIcon,
-  SnowflakeIcon,
   QwenIcon,
   SmolLMIcon,
 } from '../components/icons';
@@ -19,7 +18,6 @@ export const modelDetailsList: ModelDetails[] = [
   { name: 'phi', icon: MicrosoftIcon },
   { name: 'mistral', icon: MistralIcon },
   { name: 'gemma', icon: GoogleIcon },
-  { name: 'snowflake', icon: SnowflakeIcon },
   { name: 'qwen', icon: QwenIcon },
   { name: 'smollm', icon: SmolLMIcon },
 ];
@@ -96,8 +94,6 @@ export async function streamingGenerating(
     onError(error as Error);
   }
 }
-
-export const availableModels: string[] = [];
-for (let i = 0; i < webllm.prebuiltAppConfig.model_list.length; i++) {
-  availableModels.push(webllm.prebuiltAppConfig.model_list[i].model_id);
-}
+export const availableModels: string[] = webllm.prebuiltAppConfig.model_list
+  .filter((model) => model.model_type !== 1 && model.model_type !== 2) // filter out embedding / vlms (https://github.com/mlc-ai/web-llm/blob/a24213cda0013e1772be7084bb8cbfdfec8af407/src/config.ts#L229-L233)
+  .map((model) => model.model_id);
