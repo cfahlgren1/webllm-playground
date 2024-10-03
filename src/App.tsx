@@ -14,6 +14,9 @@ const PAGE_TITLE = "WebLLM Playground ✨";
 const PAGE_HEADING = "WebLLM Playground ✨";
 const PAGE_DESCRIPTION = "Blazing fast inference with WebGPU and WebLLM running locally in your browser.";
 
+// @ts-expect-error - navigator.gpu is not yet in TypeScript's lib
+const IS_WEB_GPU_ENABLED = !!navigator.gpu;
+
 interface Message {
   content: string;
   role: 'system' | 'user' | 'assistant';
@@ -127,6 +130,30 @@ function App() {
     }
   }
   const SelectedModelIcon = selectedModelDetails ? selectedModelDetails.icon : null;
+
+  if (!IS_WEB_GPU_ENABLED) {
+    return (
+      <div className="min-h-screen flex flex-col bg-[#121212] text-gray-300 font-inter">
+        <div className="px-4 py-6 sm:px-6">
+          <Header heading={PAGE_HEADING} description={PAGE_DESCRIPTION} />
+          <p className="text-center text-xl text-white mt-2">
+            WebGPU is not supported in your browser. 😢
+          </p>
+          <div className="flex justify-center mt-6">
+            <a
+              href="https://caniuse.com/webgpu"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-4 py-2 border-[var(--border-color)] border-[1.5px] bg-[var(--bg-color)] rounded-md text-sm font-medium text-white hover:bg-gray-700 focus:ring-2 focus:ring-[var(--border-color)] focus:ring-offset-2 focus:ring-offset-gray-900 transition-colors duration-200"
+              aria-label="Check WebGPU browser support"
+            >
+              Check WebGPU browser support
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-[#121212] text-gray-300 font-inter">
