@@ -116,6 +116,12 @@ const ModelSearch: React.FC<ModelSearchProps> = ({
     onClose();
   }, [onClose, resetState]);
 
+  const handleOverlayClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (event.target === event.currentTarget) {
+      handleClose();
+    }
+  };
+
   useEffect(() => {
     const sortedModels = sortAndGroupModels(availableModels);
 
@@ -184,7 +190,10 @@ const ModelSearch: React.FC<ModelSearchProps> = ({
     .sort(([a], [b]) => (modelCounts[b] || 0) - (modelCounts[a] || 0));
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 overflow-hidden">
+    <div 
+      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 overflow-hidden"
+      onClick={handleOverlayClick}
+    >
       <div className="bg-[var(--bg-color)] rounded-lg w-full max-w-4xl max-h-[80vh] flex flex-col shadow-xl overflow-auto">
         <div className="flex justify-between items-center p-4 border-b border-[var(--border-color)]">
           <h2 className="text-xl font-semibold text-gray-100">Select Model</h2>
